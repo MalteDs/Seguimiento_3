@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         int i=1;
-        int turno=1;
         Scanner sc = new Scanner(System.in);
         DoubleLinkedList list = new DoubleLinkedList();
         boolean out=false;
@@ -20,29 +19,15 @@ public class Main {
                     i++;
                     break;
                 case 2:
-                    System.out.println("Turno: " + list.findInHead(list.getHead(), turno));
-
+                    System.out.println("Turno: "+list.getTurn());
                     break;
-                case 3:
-                    turno++;
+                case 3: list.saltarTurno(list.getPosition());
                     break;
-                case 4:
+                case 4: list.deleteNode(list.getPosition());
                     break;
                 case 5: out=true;
 
             }
         }
-
-
-
-
-        list.addNodeAtHead(new Node(2));
-        list.addNodeAtTail(new Node(3));
-        list.addNodeAtTail(new Node(4));
-        list.addNodeAtHead(new Node(1));
-        list.deleteNodeAtHead();
-        list.deleteNodeAtTail();
-
-        list.print();
     }
 }

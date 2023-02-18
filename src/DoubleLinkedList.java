@@ -4,6 +4,8 @@ public class DoubleLinkedList {
 
     private Node tail;
 
+    private Node position;
+
     public void addNodeAtHead(Node node){
         if(head==null){ // lista vacia
             tail=node;
@@ -17,14 +19,14 @@ public class DoubleLinkedList {
         if(head==null){ // lista vacia
             head=node;
             tail=node;
-        } else {
+            position=node;
+        }else{
             tail.setNext(node);
             node.setPrevious(tail);
             tail=node;
-            tail.setNext(head);
             head.setPrevious(tail);
+            tail.setNext(head);
         }
-
     }
 
 
@@ -43,13 +45,6 @@ public class DoubleLinkedList {
         }
     }
 
-    public int findInHead(Node pointer, int value) {
-        if (pointer.getValue() == value) {
-            return pointer.getValue();
-        }
-        else findNode(pointer, value);
-        return findNode(pointer, value);
-    }
     public int findNode(Node pointer, int value){
         if(pointer.getValue()!=value){ // hace la recursion cuando no encunetra al nodo
             findNode(pointer.getNext(),value);
@@ -59,29 +54,34 @@ public class DoubleLinkedList {
        return pointer.getValue();
     }
 
-    public void deleteNode(Node pointer, int value){
-        if(pointer!=null && pointer.getValue()!=value) {
-            findNode(pointer.getNext(), value);
-        }
-        else if (pointer!=null && pointer.getValue()==value){
+    public void saltarTurno(Node pointer){
+        position=pointer.getNext();
+    }
+
+    public int getTurn(){
+        return position.getValue();
+    }
+    public void deleteNode(Node pointer){
+        if (pointer!=null){
             pointer.setNext(pointer.getNext().getNext());
             pointer.getNext().getNext().setPrevious(pointer);
             pointer.getNext().setPrevious(null);
+            position=pointer.getNext();
         }
     }
 
-    public void nextNode(Node pointer, int turno){
-
-    }
-    public void print(){
-        print(head);
+    public void print(int i){
+        print(head, i);
     }
 
-    private void print(Node pointer){
-        if(pointer!=null){
+    private void print(Node pointer, int i){
+
+        if(i>=1){
+            System.out.println(i);
             System.out.println(pointer);
-            print(pointer.getNext());
+            print(pointer.getNext(), i-1);
         }
+
     }
 
     public Node getHead() {
@@ -89,4 +89,6 @@ public class DoubleLinkedList {
     }
 
     public Node getTail() { return tail; }
+
+    public Node getPosition(){return position; }
 }
