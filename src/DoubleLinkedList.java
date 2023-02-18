@@ -62,12 +62,10 @@ public class DoubleLinkedList {
         return position.getValue();
     }
     public void deleteNode(Node pointer){
-        if (pointer!=null){
-            pointer.setNext(pointer.getNext().getNext());
-            pointer.getNext().getNext().setPrevious(pointer);
-            pointer.getNext().setPrevious(null);
-            position=pointer.getNext();
-        }
+        pointer.setNext(pointer.getNext().getNext());
+        pointer.getNext().getNext().setPrevious(pointer);
+        pointer.getNext().setPrevious(null);
+        position=pointer.getNext();
     }
 
     public void print(int i){

@@ -23,7 +23,7 @@ public class Main {
                     break;
                 case 3: list.saltarTurno(list.getPosition());
                     break;
-                case 4: list.deleteNode(list.getPosition());
+                case 4: list.deleteNode(list.getHead());
                     break;
                 case 5: out=true;
 
